@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Navbar() {
+  const [articlesOpen, setArticlesOpen] = useState(false);
   return (
     <header className="py-8 border-b border-neutral-800">
       <div className="flex justify-between items-start mb-6">
@@ -22,11 +26,18 @@ export default function Navbar() {
         <Link href="/">Home</Link>
 
         <div className="relative group">
-          <button className="hover:text-white">
+          <button
+            onClick={() => setArticlesOpen(!articlesOpen)}
+            className="hover:text-white"
+          >
             Articles ▼
           </button>
 
-          <div className="absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible flex flex-col bg-neutral-900 border border-neutral-800 min-w-[220px] z-50 pt-2 transition-all duration-200">
+          <div
+            className={`absolute top-full left-0 flex flex-col bg-neutral-900 border border-neutral-800 min-w-[220px] z-50 pt-2 transition-all duration-200 ${
+              articlesOpen ? "opacity-100 visible" : "opacity-0 invisible"
+            }`}
+          >
             <Link href="/articles" className="px-4 py-3 hover:bg-neutral-800">
               All Articles
             </Link>
