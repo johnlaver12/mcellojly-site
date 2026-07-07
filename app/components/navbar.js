@@ -30,7 +30,7 @@ export default function Navbar() {
             onClick={() => setArticlesOpen(!articlesOpen)}
             className="hover:text-white"
           >
-            Articles ▼
+            ARTICLES ▼
           </button>
 
           <div

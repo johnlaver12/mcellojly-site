@@ -1,5 +1,6 @@
 import Navbar from "../components/navbar";
 import Link from "next/link";
+import Image from "next/image";
 import { supabase } from "../../lib/supabase";
 
 export default async function Articles() {
@@ -65,34 +66,10 @@ export default async function Articles() {
           </Link>
         </div>
 
-        {/* Featured Article */}
-        <section className="mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-4">
-            Featured Article
-          </p>
-
-          <div className="h-[450px] bg-neutral-900 border border-neutral-800 mb-6 flex items-center justify-center text-neutral-600">
-            Featured Article Image
-          </div>
-
-          <h2 className="text-4xl font-bold mb-3">
-            THE FORGOTTEN HOSPITAL
-          </h2>
-
-          <p className="text-neutral-500 mb-4">
-            Brooklyn, NY • June 22, 2026 • ACTIVE
-          </p>
-
-          <p className="text-neutral-400 max-w-3xl">
-            A silent relic hidden between city blocks. Rusted equipment,
-            abandoned hallways, and decades of untouched history.
-          </p>
-        </section>
-
         {/* Article Grid */}
         <section>
           <p className="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-6">
-            Recent Articles
+            All Articles
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -102,9 +79,13 @@ export default async function Articles() {
                 href={`/articles/${article.category}/${article.slug}`}
                 className="block border border-neutral-800 p-4 hover:border-white hover:scale-[1.01] transition-all duration-200"
               >
-                <div className="h-48 bg-neutral-900 mb-4 rounded flex items-center justify-center text-neutral-600">
-                  Image Coming Soon
-                </div>
+                <Image
+                  src={article.hero_image}
+                  alt={article.title}
+                  width={800}
+                  height={500}
+                  className="w-full h-48 object-cover rounded-lg mb-4"
+                />
 
                 <h3 className="text-xl font-semibold mb-2">
                   {article.title}
