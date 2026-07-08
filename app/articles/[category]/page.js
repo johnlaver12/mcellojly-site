@@ -1,5 +1,6 @@
 import Navbar from "../../components/navbar";
 import Link from "next/link";
+import Image from "next/image";
 import { supabase } from "../../../lib/supabase";
 
 export default async function CategoryPage({ params }) {
@@ -31,7 +32,13 @@ export default async function CategoryPage({ params }) {
               href={`/articles/${article.category}/${article.slug}`}
               className="border border-neutral-800 p-4 hover:border-neutral-500 transition-all"
             >
-              <div className="h-48 bg-neutral-900 mb-4"></div>
+              <Image
+                src={article.hero_image}
+                alt={article.title}
+                width={800}
+                height={500}
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
 
               <h2 className="text-xl font-semibold mb-2">
                 {article.title}

@@ -74,7 +74,7 @@ export default async function ArticlePage({ params }) {
         {images && images.length > 0 && (
           <section className="mt-20">
             <h2 className="text-3xl font-bold mb-8">
-              Photo Gallery
+              Photo Gallery (Extras in the Gallery tab)
             </h2>
 
             <div className="space-y-16">

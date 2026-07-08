@@ -1,5 +1,5 @@
 import Navbar from "../components/navbar";
-import Image from "next/image";
+import LightboxGallery from "../components/LightboxGallery";
 import { supabase } from "../../lib/supabase";
 
 export default async function Gallery() {
@@ -115,32 +115,23 @@ export default async function Gallery() {
                     {article.title}
                   </h2>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {imageMap[article.id]?.length > 0 ? (
 
-                    {imageMap[article.id]?.length > 0 ? (
+                    <LightboxGallery
+                      className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4"
+                      images={imageMap[article.id].map((image) => ({
+                        src: `https://ddkaeakoimtrlccigheo.supabase.co/storage/v1/object/public/article-images/${image.storage_path.trim()}`,
+                        alt: image.caption || article.title,
+                      }))}
+                    />
 
-                      imageMap[article.id].map((image) => (
+                  ) : (
 
-                        <Image
-                          key={image.id}
-                          src={`https://ddkaeakoimtrlccigheo.supabase.co/storage/v1/object/public/article-images/${image.storage_path.trim()}`}
-                          alt={image.caption || article.title}
-                          width={500}
-                          height={500}
-                          className="aspect-square w-full object-cover rounded-lg hover:scale-[1.02] transition duration-200"
-                        />
+                    <p className="text-neutral-600">
+                      No photos yet.
+                    </p>
 
-                      ))
-
-                    ) : (
-
-                      <p className="text-neutral-600">
-                        No photos yet.
-                      </p>
-
-                    )}
-
-                  </div>
+                  )}
 
                   <hr className="border-neutral-800 mt-20" />
 
