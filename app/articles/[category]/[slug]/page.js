@@ -23,6 +23,7 @@ export default async function ArticlePage({ params }) {
   .from("article_images")
   .select("*")
   .eq("article_id", article.id)
+  .eq("show_in_article", true)
   .order("display_order");
 
   console.log("ARTICLE ID:", article.id);
@@ -88,7 +89,7 @@ export default async function ArticlePage({ params }) {
                   />
 
                   {image.caption && (
-                    <p className="text-sm text-neutral-500 italic mt-3">
+                    <p className="text-lg text-neutral-300 leading-8 mt-4">
                       {image.caption}
                     </p>
                   )}
