@@ -5,39 +5,57 @@ import Link from "next/link";
 
 export default async function Home() {
   // Featured article
-  const { data: featured } = await supabase
+  const { data: featured, error: featuredError } = await supabase
     .from("articles")
     .select("*")
     .eq("featured", true)
     .single();
 
+  console.log("FEATURED:", featured);
+  console.log("FEATURED ERROR:", featuredError);
+
   // Latest articles
-  const { data: latest } = await supabase
+  const { data: latest, error: latestError } = await supabase
     .from("articles")
     .select("*")
     .order("id", { ascending: false })
     .limit(6);
 
+  console.log("LATEST:", latest);
+  console.log("LATEST ERROR:", latestError);
+
   // Category counts
-  const { count: stations } = await supabase
+  const { count: stations, error: stationsError } = await supabase
     .from("articles")
     .select("*", { count: "exact", head: true })
     .eq("category", "stations");
 
-  const { count: tracks } = await supabase
+  console.log("STATIONS COUNT:", stations);
+  console.log("STATIONS ERROR:", stationsError);
+
+  const { count: tracks, error: tracksError } = await supabase
     .from("articles")
     .select("*", { count: "exact", head: true })
     .eq("category", "tracks");
 
-  const { count: layups } = await supabase
+  console.log("TRACKS COUNT:", tracks);
+  console.log("TRACKS ERROR:", tracksError);
+
+  const { count: layups, error: layupsError } = await supabase
     .from("articles")
     .select("*", { count: "exact", head: true })
     .eq("category", "layups");
 
-  const { count: infrastructure } = await supabase
+  console.log("LAYUPS COUNT:", layups);
+  console.log("LAYUPS ERROR:", layupsError);
+
+  const { count: infrastructure, error: infrastructureError } = await supabase
     .from("articles")
     .select("*", { count: "exact", head: true })
     .eq("category", "infrastructure");
+
+  console.log("INFRASTRUCTURE COUNT:", infrastructure);
+  console.log("INFRASTRUCTURE ERROR:", infrastructureError);
 
   return (
     <main className="min-h-screen bg-black text-neutral-100 px-8 md:px-16">
